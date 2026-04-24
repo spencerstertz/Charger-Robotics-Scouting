@@ -1,554 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5348 Scout Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #001f3f;
-      color: #222;
-    }
-    .wrap {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.08);
-    }
-    h1, h2 {
-      margin-top: 0;
-    }
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    input[type="text"], input[type="number"], textarea, select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-sizing: border-box;
-      margin-bottom: 12px;
-      font-size: 16px;
-    }
-    textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .radio-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 18px;
-      margin-bottom: 12px;
-    }
-    .radio-group label {
-      font-weight: normal;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin: 0;
-    }
-    .actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    button {
-      padding: 12px 16px;
-      border: 0;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .primary {
-      background: #345cb3;
-      color: white;
-    }
-    .primary:hover {
-      background: #001633;
-    }
-    .secondary {
-      background: #ddd;
-    }
-    .status {
-      margin: 10px 0;
-      font-weight: 600;
-    }
-    .small {
-      font-size: 14px;
-      color: #555;
-    }
-    @media (max-width: 700px) {
-      .row {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5348 Scout Form</title>
+
+<style>
+body{
+  font-family:Arial,sans-serif;
+  margin:0;
+  background:#001f3f;
+  color:#222;
+}
+.wrap{
+  max-width:900px;
+  margin:0 auto;
+  padding:16px;
+}
+.card{
+  background:white;
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+label{
+  display:block;
+  font-weight:600;
+  margin-bottom:8px;
+}
+input[type=text],
+input[type=number],
+textarea,
+select{
+  width:100%;
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  box-sizing:border-box;
+  margin-bottom:12px;
+  font-size:16px;
+}
+textarea{
+  min-height:80px;
+  resize:vertical;
+}
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.radio-group{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 18px;
+  margin-bottom:12px;
+}
+.radio-group label{
+  font-weight:normal;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin:0;
+}
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+button{
+  padding:12px 16px;
+  border:0;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:16px;
+}
+.primary{
+  background:#345cb3;
+  color:white;
+}
+.primary:hover{
+  background:#001633;
+}
+.secondary{
+  background:#ddd;
+}
+.status{
+  margin:10px 0;
+  font-weight:600;
+}
+.small{
+  font-size:14px;
+  color:#555;
+}
+@media (max-width:700px){
+  .row{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="card">
-      <h1>5348 Scouting Form WC 2026</h1>
-      <div class="small">Offline-capable. Saves unsent entries on this device.</div>
-      <div class="status" id="status">Ready</div>
-      <div class="small" id="queueCount"></div>
-    </div>
 
-    <form id="scoutForm">
-      <div class="card">
-        <div class="row">
-          <div>
-            <label>First Name</label>
-            <input type="text" id="name" required />
-          </div>
-          <div>
-            <label>What team number are you scouting?</label>
-            <input type="text" id="team" list="teamList" inputmode="numeric" required placeholder="Type or select team" />
-            <datalist id="teamList">
-              <option value="188"></option>
-              <option value="238"></option>
-              <option value="401"></option>
-              <option value="494"></option>
-              <option value="503"></option>
-              <option value="540"></option>
-              <option value="573"></option>
-              <option value="581"></option>
-              <option value="761"></option>
-              <option value="910"></option>
-              <option value="1014"></option>
-              <option value="1259"></option>
-              <option value="1287"></option>
-              <option value="1296"></option>
-              <option value="1625"></option>
-              <option value="1701"></option>
-              <option value="1706"></option>
-              <option value="1710"></option>
-              <option value="1732"></option>
-              <option value="1787"></option>
-              <option value="1986"></option>
-              <option value="2056"></option>
-              <option value="2102"></option>
-              <option value="2199"></option>
-              <option value="2220"></option>
-              <option value="2383"></option>
-              <option value="2486"></option>
-              <option value="2607"></option>
-              <option value="2659"></option>
-              <option value="2834"></option>
-              <option value="3015"></option>
-              <option value="3035"></option>
-              <option value="3175"></option>
-              <option value="3297"></option>
-              <option value="3467"></option>
-              <option value="3506"></option>
-              <option value="3512"></option>
-              <option value="3539"></option>
-              <option value="3641"></option>
-              <option value="4143"></option>
-              <option value="4174"></option>
-              <option value="4191"></option>
-              <option value="4201"></option>
-              <option value="4613"></option>
-              <option value="4698"></option>
-              <option value="5000"></option>
-              <option value="5086"></option>
-              <option value="5348"></option>
-              <option value="5406"></option>
-              <option value="5454"></option>
-              <option value="6121"></option>
-              <option value="6152"></option>
-              <option value="6200"></option>
-              <option value="6328"></option>
-              <option value="6329"></option>
-              <option value="6517"></option>
-              <option value="6639"></option>
-              <option value="7287"></option>
-              <option value="7451"></option>
-              <option value="8005"></option>
-              <option value="8044"></option>
-              <option value="8214"></option>
-              <option value="8267"></option>
-              <option value="8513"></option>
-              <option value="8749"></option>
-              <option value="9449"></option>
-              <option value="9692"></option>
-              <option value="9785"></option>
-              <option value="10131"></option>
-              <option value="10907"></option>
-              <option value="11024"></option>
-              <option value="11118"></option>
-              <option value="11270"></option>
-              <option value="11303"></option>
-              <option value="11493"></option>
-            </datalist>
-          </div>
-        </div>
+<div class="wrap">
 
-        <div class="row">
-          <div>
-            <label>What match number are you scouting?</label>
-            <input type="number" id="matchNumber" step="1" min="1" inputmode="numeric" required />
-          </div>
-          <div>
-            <label>Is your robot on the field?</label>
-            <div class="radio-group">
-              <label><input type="radio" name="onField" value="Yes" required> Yes</label>
-              <label><input type="radio" name="onField" value="No"> No</label>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="card">
+<h1>5348 Scouting Form WC 2026</h1>
+<div class="small">Offline capable. Saves unsent entries on this device.</div>
+<div class="status" id="status">Ready</div>
+<div class="small" id="queueCount"></div>
+</div>
 
-      <div class="card">
-        <h2>Auto</h2>
+<form id="scoutForm">
 
-        <label>What auto zones did your team enter? (Companion Sheet)</label>
-        <input type="text" id="autoZones" />
+<div class="card">
 
-        <label>Did they shoot their preload before entering the neutral zone?</label>
-        <div class="radio-group">
-          <label><input type="radio" name="preloadBeforeNeutral" value="They never entered the neutral zone."> They never entered the neutral zone.</label>
-          <label><input type="radio" name="preloadBeforeNeutral" value="Yes"> Yes</label>
-          <label><input type="radio" name="preloadBeforeNeutral" value="No"> No</label>
-        </div>
+<div class="row">
 
-        <div class="row">
-          <div>
-            <label>How many fuel did they score in auto?</label>
-            <input type="number" id="autoFuel" step="any" />
-          </div>
-          <div>
-            <label>Did they climb in auto?</label>
-            <div class="radio-group">
-              <label><input type="radio" name="autoClimb" value="Left"> Yes</label>
-              <label><input type="radio" name="autoClimb" value="No"> No</label>
-              <label><input type="radio" name="autoClimb" value="Tried but failed"> Tried but Failed</label>
-            </div>
-          </div>
-        </div>
+<div>
+<label>First Name</label>
+<input type="text" id="name" required>
+</div>
 
-        <label>If they Failed: Why?</label>
-        <input type="text" id="autoFailWhy" />
+<div>
+<label>What team number are you scouting?</label>
+<input type="text" id="team" list="teamList" required placeholder="Type or select team">
+<datalist id="teamList">
+<option value="188">
+<option value="238">
+<option value="401">
+<option value="494">
+<option value="503">
+<option value="540">
+<option value="573">
+<option value="581">
+<option value="761">
+<option value="910">
+<option value="1014">
+<option value="1259">
+<option value="1287">
+<option value="1296">
+<option value="1625">
+<option value="1701">
+<option value="1706">
+<option value="1710">
+<option value="1732">
+<option value="1787">
+<option value="1986">
+<option value="2056">
+<option value="2102">
+<option value="2199">
+<option value="2220">
+<option value="2383">
+<option value="2486">
+<option value="2607">
+<option value="2659">
+<option value="2834">
+<option value="3015">
+<option value="3035">
+<option value="3175">
+<option value="3297">
+<option value="3467">
+<option value="3506">
+<option value="3512">
+<option value="3539">
+<option value="3641">
+<option value="4143">
+<option value="4174">
+<option value="4191">
+<option value="4201">
+<option value="4613">
+<option value="4698">
+<option value="5000">
+<option value="5086">
+<option value="5348">
+<option value="5406">
+<option value="5454">
+<option value="6121">
+<option value="6152">
+<option value="6200">
+<option value="6328">
+<option value="6329">
+<option value="6517">
+<option value="6639">
+<option value="7287">
+<option value="7451">
+<option value="8005">
+<option value="8044">
+<option value="8214">
+<option value="8267">
+<option value="8513">
+<option value="8749">
+<option value="9449">
+<option value="9692">
+<option value="9785">
+<option value="10131">
+<option value="10907">
+<option value="11024">
+<option value="11118">
+<option value="11270">
+<option value="11303">
+<option value="11493">
+</datalist>
+</div>
 
-        <label>Other Notes for Auto</label>
-        <div class="radio-group">
-          <label><input type="radio" name="autoNotesPreset" value="They didn't have an auto"> They didn't have an auto</label>
-          <label><input type="radio" name="autoNotesPreset" value="They only shot their preload and didn't move"> They only shot their preload and didn't move</label>
-          <label><input type="radio" name="autoNotesPreset" value="Other"> Other:</label>
-        </div>
-        <input type="text" id="autoNotesOther" placeholder="Fill in only if other" />
-      </div>
+</div>
 
-      <div class="card">
-        <h2>Teleop</h2>
+<div class="row">
 
-        <div class="row">
-          <div>
-            <label>How many fuel did they score in teleop?</label>
-            <input type="number" id="teleopFuel" step="any" />
-          </div>
-          <div>
-            <label>Did they die?</label>
-            <div class="radio-group">
-              <label><input type="radio" name="died" value="Yes"> Yes</label>
-              <label><input type="radio" name="died" value="No"> No</label>
-            </div>
-          </div>
-        </div>
+<div>
+<label>What match number are you scouting?</label>
+<input type="number" id="matchNumber" step="1" min="1" required>
+</div>
 
-        <label>Describe how they died if applicable</label>
-        <input type="text" id="diedDescription" />
+<div>
+<label>Is your robot on the field?</label>
+<div class="radio-group">
+<label><input type="radio" name="onField" value="Yes" required> Yes</label>
+<label><input type="radio" name="onField" value="No"> No</label>
+</div>
+</div>
 
-        <label>Did they climb in end game?</label>
-        <div class="radio-group">
-          <label><input type="radio" name="endgameClimb" value="L1"> L1</label>
-          <label><input type="radio" name="endgameClimb" value="L2"> L2</label>
-          <label><input type="radio" name="endgameClimb" value="L3"> L3</label>
-          <label><input type="radio" name="endgameClimb" value="No"> No</label>
-          <label><input type="radio" name="endgameClimb" value="Tried but Failed"> Tried but Failed</label>
-        </div>
+</div>
 
-        <div class="row">
-          <div>
-            <label>How long did their climb take?</label>
-            <input type="number" id="climbTime" step="any" />
-          </div>
-          <div>
-            <label>Where did they climb?</label>
-            <div class="radio-group">
-              <label><input type="radio" name="climbWhere" value="Left"> Left</label>
-              <label><input type="radio" name="climbWhere" value="Center"> Center</label>
-              <label><input type="radio" name="climbWhere" value="Right"> Right</label>
-            </div>
-          </div>
-        </div>
+</div>
 
-        <label>If they Failed: Why?</label>
-        <input type="text" id="endgameFailWhy" />
+<div class="card">
 
-        <div class="row">
-          <div>
-            <label>Approximately how long did they pass for?</label>
-            <input type="number" id="passSeconds" step="any" />
-          </div>
-          <div>
-            <label>How many fuel did they pass?</label>
-            <input type="number" id="passFuel" step="any" />
-          </div>
-        </div>
+<h2>Auto</h2>
 
-        <label>How did they pass?</label>
-        <div class="radio-group">
-          <label><input type="radio" name="passType" value="Limited Aim"> Limited Aim</label>
-          <label><input type="radio" name="passType" value="Stop Pass"> Stop Pass</label>
-          <label><input type="radio" name="passType" value="Dynamic Pass"> Dynamic Pass</label>
-          <label><input type="radio" name="passType" value="Other"> Other</label>
-        </div>
+<label>What auto zones did your team enter? (Companion Sheet)</label>
+<div class="radio-group">
+<label><input type="radio" name="autoZonesPreset" value="They didn't enter any of the zones on the companion sheet" required> They didn't enter any of the zones on the companion sheet</label>
+<label><input type="radio" name="autoZonesPreset" value="Other"> Other:</label>
+</div>
+<input type="text" id="autoZonesOther" placeholder="Fill in zones only if other">
 
-        <label>Passing Ability Descriptions</label>
-        <textarea readonly>Limited Aim: Pass over fixed path relative to robot
-Stop-Pass: Intake, Stop, Unload
-Dynamic Aim: Pass to fixed location while moving</textarea>
+<label>Did they shoot their preload before entering the neutral zone?</label>
+<div class="radio-group">
+<label><input type="radio" name="preloadBeforeNeutral" value="They never entered the neutral zone." required> They never entered the neutral zone.</label>
+<label><input type="radio" name="preloadBeforeNeutral" value="Yes"> Yes</label>
+<label><input type="radio" name="preloadBeforeNeutral" value="No"> No</label>
+</div>
 
-        <div class="row">
-          <div>
-            <label>How long did they play defense for?</label>
-            <input type="number" id="defenseSeconds" step="any" />
-          </div>
-          <div>
-            <label>How effective was their defense?</label>
-            <select id="defenseEffectiveness">
-              <option value=""></option>
-              <option>They did not play defense</option>
-              <option>Their defense caused lots of penalties</option>
-              <option>Their defense was never effective</option>
-              <option>Their defense was rarely effective</option>
-              <option>Their defense was sometimes effective</option>
-              <option>Their defense was effective most of the time</option>
-              <option>Their defense was always effective</option>
-            </select>
-          </div>
-        </div>
+<div class="row">
 
-        <label>How effectively did they avoid defense?</label>
-        <select id="avoidDefense">
-          <option value=""></option>
-          <option>Defense was never played on them.</option>
-          <option>They were completely locked down by defense. (0%)</option>
-          <option>They struggled a lot against defense. (15%)</option>
-          <option>They struggled moderately against defense. (40%)</option>
-          <option>They were able to avoid a decent amount of defense. (60%)</option>
-          <option>They were rarely affected by defense. (90%)</option>
-          <option>They were never affected by defense. (100%)</option>
-        </select>
+<div>
+<label>How many fuel did they score in auto?</label>
+<input type="number" id="autoFuel" required>
+</div>
 
-        <label>Other notes for teleop?</label>
-        <textarea id="teleopNotes"></textarea>
-      </div>
+<div>
+<label>Did they climb in auto?</label>
+<div class="radio-group">
+<label><input type="radio" name="autoClimb" value="Yes" required> Yes</label>
+<label><input type="radio" name="autoClimb" value="No"> No</label>
+<label><input type="radio" name="autoClimb" value="Tried but Failed"> Tried but Failed</label>
+</div>
+</div>
 
-      <div class="card actions">
-        <button type="submit" class="primary">Submit</button>
-        <button type="button" class="secondary" id="saveOfflineBtn">Save Offline</button>
-        <button type="button" class="secondary" id="syncBtn">Sync Pending</button>
-        <button type="button" class="secondary" id="clearBtn">Clear Form</button>
-      </div>
-    </form>
-  </div>
+</div>
 
-  <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz8swoa3E3tu_JDlRq236cFrB_heDQWEYnU2mQ6iwsbBWpljlJnOlVpHm9np8gisITH/exec";
-    const QUEUE_KEY = "frcScoutPendingQueue";
+<label>If they failed: why?</label>
+<input type="text" id="autoFailWhy">
 
-    const form = document.getElementById("scoutForm");
-    const statusEl = document.getElementById("status");
-    const queueCountEl = document.getElementById("queueCount");
+<label>Other Notes for Auto</label>
+<div class="radio-group">
+<label><input type="radio" name="autoNotesPreset" value="They didn't have an auto"> They didn't have an auto</label>
+<label><input type="radio" name="autoNotesPreset" value="They only shot preload and didn't move"> They only shot preload and didn't move</label>
+<label><input type="radio" name="autoNotesPreset" value="Other"> Other</label>
+</div>
+<input type="text" id="autoNotesOther">
 
-    function setStatus(text) {
-      statusEl.textContent = text;
+</div>
+
+<div class="card">
+
+<h2>Teleop</h2>
+
+<div class="row">
+
+<div>
+<label>How many fuel did they score in teleop?</label>
+<input type="number" id="teleopFuel" required>
+</div>
+
+<div>
+<label>Did they die?</label>
+<div class="radio-group">
+<label><input type="radio" name="died" value="Yes" required> Yes</label>
+<label><input type="radio" name="died" value="No"> No</label>
+</div>
+</div>
+
+</div>
+
+<label>Describe how they died if applicable</label>
+<input type="text" id="diedDescription">
+
+<label>Other notes for teleop</label>
+<textarea id="teleopNotes"></textarea>
+
+</div>
+
+<div class="card actions">
+<button type="submit" class="primary">Submit</button>
+<button type="button" class="secondary" id="saveOfflineBtn">Save Offline</button>
+<button type="button" class="secondary" id="syncBtn">Sync Pending</button>
+<button type="button" class="secondary" id="clearBtn">Clear Form</button>
+</div>
+
+</form>
+
+</div>
+
+<script>
+
+const WEB_APP_URL="PASTE_WEB_APP_URL_HERE";
+const QUEUE_KEY="frcScoutPendingQueue";
+
+const form=document.getElementById("scoutForm");
+const statusEl=document.getElementById("status");
+const queueCountEl=document.getElementById("queueCount");
+
+function setStatus(t){
+  statusEl.textContent=t;
+}
+
+function getRadioValue(name){
+  const checked=document.querySelector(`input[name="${name}"]:checked`);
+  return checked?checked.value:"";
+}
+
+function getAutoZones(){
+  const preset=getRadioValue("autoZonesPreset");
+  const other=document.getElementById("autoZonesOther").value;
+  return preset==="Other"?other:preset;
+}
+
+function getAutoNotes(){
+  const preset=getRadioValue("autoNotesPreset");
+  const other=document.getElementById("autoNotesOther").value;
+  return preset==="Other"?other:preset;
+}
+
+function getPayload(){
+  return{
+    name:document.getElementById("name").value,
+    team:document.getElementById("team").value,
+    matchNumber:document.getElementById("matchNumber").value,
+    onField:getRadioValue("onField"),
+
+    autoZones:getAutoZones(),
+    preloadBeforeNeutral:getRadioValue("preloadBeforeNeutral"),
+    autoFuel:document.getElementById("autoFuel").value,
+    autoClimb:getRadioValue("autoClimb"),
+    autoFailWhy:document.getElementById("autoFailWhy").value,
+    autoNotes:getAutoNotes(),
+
+    teleopFuel:document.getElementById("teleopFuel").value,
+    died:getRadioValue("died"),
+    diedDescription:document.getElementById("diedDescription").value,
+    teleopNotes:document.getElementById("teleopNotes").value
+  };
+}
+
+function getQueue(){
+  return JSON.parse(localStorage.getItem(QUEUE_KEY)||"[]");
+}
+
+function setQueue(q){
+  localStorage.setItem(QUEUE_KEY,JSON.stringify(q));
+  renderQueueCount();
+}
+
+function addToQueue(payload){
+  const q=getQueue();
+  q.push(payload);
+  setQueue(q);
+}
+
+function renderQueueCount(){
+  queueCountEl.textContent="Pending unsynced entries: "+getQueue().length;
+}
+
+async function sendPayload(payload){
+  const response=await fetch(WEB_APP_URL,{
+    method:"POST",
+    headers:{"Content-Type":"text/plain;charset=utf-8"},
+    body:JSON.stringify(payload)
+  });
+
+  const text=await response.text();
+  const data=JSON.parse(text);
+
+  if(!data.ok){
+    throw new Error("Submit failed");
+  }
+}
+
+async function syncQueue(){
+  const q=getQueue();
+  if(!q.length){
+    setStatus("No pending entries.");
+    return;
+  }
+
+  const remaining=[];
+
+  for(const item of q){
+    try{
+      await sendPayload(item);
+    }catch(err){
+      remaining.push(item);
     }
+  }
 
-    function getRadioValue(name) {
-      const checked = document.querySelector(`input[name="${name}"]:checked`);
-      return checked ? checked.value : "";
-    }
+  setQueue(remaining);
 
-    function getAutoNotes() {
-      const preset = getRadioValue("autoNotesPreset");
-      const other = document.getElementById("autoNotesOther").value;
-      return preset === "Other" ? other : preset;
-    }
+  if(!remaining.length){
+    setStatus("All pending entries synced.");
+  }else{
+    setStatus(remaining.length+" still pending.");
+  }
+}
 
-    function getPayload() {
-      return {
-        name: document.getElementById("name").value,
-        team: document.getElementById("team").value,
-        matchNumber: document.getElementById("matchNumber").value,
-        onField: getRadioValue("onField"),
+function clearForm(){
+  form.reset();
+}
 
-        autoZones: document.getElementById("autoZones").value,
-        preloadBeforeNeutral: getRadioValue("preloadBeforeNeutral"),
-        autoFuel: document.getElementById("autoFuel").value,
-        autoClimb: getRadioValue("autoClimb"),
-        autoFailWhy: document.getElementById("autoFailWhy").value,
-        autoNotes: getAutoNotes(),
+form.addEventListener("submit",async function(e){
+  e.preventDefault();
 
-        teleopFuel: document.getElementById("teleopFuel").value,
-        died: getRadioValue("died"),
-        diedDescription: document.getElementById("diedDescription").value,
-        endgameClimb: getRadioValue("endgameClimb"),
-        climbTime: document.getElementById("climbTime").value,
-        climbWhere: getRadioValue("climbWhere"),
-        endgameFailWhy: document.getElementById("endgameFailWhy").value,
+  const payload=getPayload();
 
-        passSeconds: document.getElementById("passSeconds").value,
-        passType: getRadioValue("passType"),
-        passFuel: document.getElementById("passFuel").value,
+  if(
+    !payload.name ||
+    !payload.team ||
+    !payload.matchNumber ||
+    !payload.onField ||
+    !payload.autoZones ||
+    !payload.preloadBeforeNeutral ||
+    payload.autoFuel==="" ||
+    !payload.autoClimb ||
+    payload.teleopFuel==="" ||
+    !payload.died
+  ){
+    setStatus("Missing required fields.");
+    return;
+  }
 
-        defenseSeconds: document.getElementById("defenseSeconds").value,
-        defenseEffectiveness: document.getElementById("defenseEffectiveness").value,
-        avoidDefense: document.getElementById("avoidDefense").value,
-        teleopNotes: document.getElementById("teleopNotes").value
-      };
-    }
+  try{
+    await sendPayload(payload);
+    setStatus("Submitted.");
+    clearForm();
+    await syncQueue();
+  }catch(err){
+    addToQueue(payload);
+    setStatus("Saved offline.");
+  }
+});
 
-    function getQueue() {
-      return JSON.parse(localStorage.getItem(QUEUE_KEY) || "[]");
-    }
+document.getElementById("saveOfflineBtn").onclick=function(){
+  addToQueue(getPayload());
+  setStatus("Saved locally.");
+};
 
-    function setQueue(queue) {
-      localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
-      renderQueueCount();
-    }
+document.getElementById("syncBtn").onclick=syncQueue;
+document.getElementById("clearBtn").onclick=clearForm;
 
-    function addToQueue(payload) {
-      const queue = getQueue();
-      queue.push({
-        id: crypto.randomUUID(),
-        createdAt: new Date().toISOString(),
-        payload
-      });
-      setQueue(queue);
-    }
+renderQueueCount();
 
-    function renderQueueCount() {
-      const count = getQueue().length;
-      queueCountEl.textContent = `Pending unsynced entries: ${count}`;
-    }
+</script>
 
-    async function sendPayload(payload) {
-      const response = await fetch(WEB_APP_URL, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload)
-      });
-
-      const text = await response.text();
-      let data = {};
-      try {
-        data = JSON.parse(text);
-      } catch (e) {
-        throw new Error("Server returned invalid JSON.");
-      }
-
-      if (!data.ok) {
-        throw new Error(data.error || "Unknown server error.");
-      }
-
-      return data;
-    }
-
-    async function syncQueue() {
-      const queue = getQueue();
-      if (!queue.length) {
-        setStatus("No pending entries.");
-        return;
-      }
-
-      setStatus(`Syncing ${queue.length} pending entries...`);
-
-      const remaining = [];
-      for (const item of queue) {
-        try {
-          await sendPayload(item.payload);
-        } catch (err) {
-          remaining.push(item);
-        }
-      }
-
-      setQueue(remaining);
-
-      if (remaining.length === 0) {
-        setStatus("All pending entries synced.");
-      } else {
-        setStatus(`${remaining.length} entries still pending.`);
-      }
-    }
-
-    function clearForm() {
-      form.reset();
-    }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const payload = getPayload();
-
-      if (!Number.isInteger(Number(payload.matchNumber))) {
-        setStatus("Match number must be a whole number.");
-        return;
-      }
-
-      if (!payload.name || !payload.team || !payload.matchNumber || !payload.onField) {
-        setStatus("Missing required basic fields.");
-        return;
-      }
-
-      if (!navigator.onLine) {
-        addToQueue(payload);
-        setStatus("Offline. Entry saved locally.");
-        clearForm();
-        return;
-      }
-
-      try {
-        setStatus("Submitting...");
-        await sendPayload(payload);
-        setStatus("Submitted to Google Sheet.");
-        clearForm();
-        await syncQueue();
-      } catch (err) {
-        addToQueue(payload);
-        setStatus("Could not submit. Saved locally for later sync.");
-      }
-    });
-
-    document.getElementById("saveOfflineBtn").addEventListener("click", () => {
-      const payload = getPayload();
-      addToQueue(payload);
-      setStatus("Saved locally without submitting.");
-      clearForm();
-    });
-
-    document.getElementById("syncBtn").addEventListener("click", syncQueue);
-    document.getElementById("clearBtn").addEventListener("click", clearForm);
-
-    window.addEventListener("online", syncQueue);
-
-    renderQueueCount();
-  </script>
 </body>
 </html>
