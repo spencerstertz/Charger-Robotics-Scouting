@@ -77,9 +77,9 @@
     .primary {
       background: #345cb3;
       color: white;
-}
-.primary:hover {
-  background: #001633;
+    }
+    .primary:hover {
+      background: #001633;
     }
     .secondary {
       background: #ddd;
@@ -117,14 +117,91 @@
           </div>
           <div>
             <label>What team number are you scouting?</label>
-            <input type="number" id="team" required />
+            <input type="text" id="team" list="teamList" inputmode="numeric" required placeholder="Type or select team" />
+            <datalist id="teamList">
+              <option value="188"></option>
+              <option value="238"></option>
+              <option value="401"></option>
+              <option value="494"></option>
+              <option value="503"></option>
+              <option value="540"></option>
+              <option value="573"></option>
+              <option value="581"></option>
+              <option value="761"></option>
+              <option value="910"></option>
+              <option value="1014"></option>
+              <option value="1259"></option>
+              <option value="1287"></option>
+              <option value="1296"></option>
+              <option value="1625"></option>
+              <option value="1701"></option>
+              <option value="1706"></option>
+              <option value="1710"></option>
+              <option value="1732"></option>
+              <option value="1787"></option>
+              <option value="1986"></option>
+              <option value="2056"></option>
+              <option value="2102"></option>
+              <option value="2199"></option>
+              <option value="2220"></option>
+              <option value="2383"></option>
+              <option value="2486"></option>
+              <option value="2607"></option>
+              <option value="2659"></option>
+              <option value="2834"></option>
+              <option value="3015"></option>
+              <option value="3035"></option>
+              <option value="3175"></option>
+              <option value="3297"></option>
+              <option value="3467"></option>
+              <option value="3506"></option>
+              <option value="3512"></option>
+              <option value="3539"></option>
+              <option value="3641"></option>
+              <option value="4143"></option>
+              <option value="4174"></option>
+              <option value="4191"></option>
+              <option value="4201"></option>
+              <option value="4613"></option>
+              <option value="4698"></option>
+              <option value="5000"></option>
+              <option value="5086"></option>
+              <option value="5348"></option>
+              <option value="5406"></option>
+              <option value="5454"></option>
+              <option value="6121"></option>
+              <option value="6152"></option>
+              <option value="6200"></option>
+              <option value="6328"></option>
+              <option value="6329"></option>
+              <option value="6517"></option>
+              <option value="6639"></option>
+              <option value="7287"></option>
+              <option value="7451"></option>
+              <option value="8005"></option>
+              <option value="8044"></option>
+              <option value="8214"></option>
+              <option value="8267"></option>
+              <option value="8513"></option>
+              <option value="8749"></option>
+              <option value="9449"></option>
+              <option value="9692"></option>
+              <option value="9785"></option>
+              <option value="10131"></option>
+              <option value="10907"></option>
+              <option value="11024"></option>
+              <option value="11118"></option>
+              <option value="11270"></option>
+              <option value="11303"></option>
+              <option value="11493"></option>
+            </datalist>
           </div>
         </div>
 
         <div class="row">
           <div>
             <label>What match number are you scouting?</label>
-            <input type="number" id="matchNumber" required />
+            <input type="number" id="matchNumber" step="1" min="1" inputmode="numeric" required />
           </div>
           <div>
             <label>Is your robot on the field?</label>
@@ -144,9 +221,9 @@
 
         <label>Did they shoot their preload before entering the neutral zone?</label>
         <div class="radio-group">
+          <label><input type="radio" name="preloadBeforeNeutral" value="They never entered the neutral zone."> They never entered the neutral zone.</label>
           <label><input type="radio" name="preloadBeforeNeutral" value="Yes"> Yes</label>
           <label><input type="radio" name="preloadBeforeNeutral" value="No"> No</label>
-          <label><input type="radio" name="preloadBeforeNeutral" value="They never entered the neutral zone."> They never entered the neutral zone.</label>
         </div>
 
         <div class="row">
@@ -168,7 +245,12 @@
         <input type="text" id="autoFailWhy" />
 
         <label>Other Notes for Auto</label>
-        <input type="text" id="autoNotes" />
+        <div class="radio-group">
+          <label><input type="radio" name="autoNotesPreset" value="They didn't have an auto"> They didn't have an auto</label>
+          <label><input type="radio" name="autoNotesPreset" value="They only shot their preload and didn't move"> They only shot their preload and didn't move</label>
+          <label><input type="radio" name="autoNotesPreset" value="Other"> Other:</label>
+        </div>
+        <input type="text" id="autoNotesOther" placeholder="Fill in only if other" />
       </div>
 
       <div class="card">
@@ -187,6 +269,9 @@
             </div>
           </div>
         </div>
+
+        <label>Describe how they died if applicable</label>
+        <input type="text" id="diedDescription" />
 
         <label>Did they climb in end game?</label>
         <div class="radio-group">
@@ -228,12 +313,16 @@
 
         <label>How did they pass?</label>
         <div class="radio-group">
-          <label><input type="radio" name="passType" value="Didn't Pass"> Didn't Pass</label>
           <label><input type="radio" name="passType" value="Limited Aim"> Limited Aim</label>
           <label><input type="radio" name="passType" value="Stop Pass"> Stop Pass</label>
           <label><input type="radio" name="passType" value="Dynamic Pass"> Dynamic Pass</label>
           <label><input type="radio" name="passType" value="Other"> Other</label>
         </div>
+
+        <label>Passing Ability Descriptions</label>
+        <textarea readonly>Limited Aim: Pass over fixed path relative to robot
+Stop-Pass: Intake, Stop, Unload
+Dynamic Aim: Pass to fixed location while moving</textarea>
 
         <div class="row">
           <div>
@@ -281,7 +370,7 @@
   </div>
 
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyHU7xSFv7tF4Mmnkc3WkUnHdxKKyrmQXn5LKCaQlNKVkQvwiizDlVyB2Pxw8-rMYEP/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz8swoa3E3tu_JDlRq236cFrB_heDQWEYnU2mQ6iwsbBWpljlJnOlVpHm9np8gisITH/exec";
     const QUEUE_KEY = "frcScoutPendingQueue";
 
     const form = document.getElementById("scoutForm");
@@ -297,6 +386,12 @@
       return checked ? checked.value : "";
     }
 
+    function getAutoNotes() {
+      const preset = getRadioValue("autoNotesPreset");
+      const other = document.getElementById("autoNotesOther").value;
+      return preset === "Other" ? other : preset;
+    }
+
     function getPayload() {
       return {
         name: document.getElementById("name").value,
@@ -309,10 +404,11 @@
         autoFuel: document.getElementById("autoFuel").value,
         autoClimb: getRadioValue("autoClimb"),
         autoFailWhy: document.getElementById("autoFailWhy").value,
-        autoNotes: document.getElementById("autoNotes").value,
+        autoNotes: getAutoNotes(),
 
         teleopFuel: document.getElementById("teleopFuel").value,
         died: getRadioValue("died"),
+        diedDescription: document.getElementById("diedDescription").value,
         endgameClimb: getRadioValue("endgameClimb"),
         climbTime: document.getElementById("climbTime").value,
         climbWhere: getRadioValue("climbWhere"),
@@ -410,6 +506,11 @@
       e.preventDefault();
 
       const payload = getPayload();
+
+      if (!Number.isInteger(Number(payload.matchNumber))) {
+        setStatus("Match number must be a whole number.");
+        return;
+      }
 
       if (!payload.name || !payload.team || !payload.matchNumber || !payload.onField) {
         setStatus("Missing required basic fields.");
