@@ -406,7 +406,9 @@ Dynamic Aim: Pass to fixed location while moving</textarea>
 
     function getPayload() {
       return {
-        name: document.getElementById("name").value,
+        entryId: crypto.randomUUID(),
+	
+	name: document.getElementById("name").value,
         team: document.getElementById("team").value,
         matchNumber: document.getElementById("matchNumber").value,
         onField: getRadioValue("onField"),
@@ -563,9 +565,8 @@ function validatePayload(payload) {
       try {
         setStatus("Submitting...");
         await sendPayload(payload);
-        setStatus("Submitted to Google Sheet.");
-        clearForm();
-        await syncQueue();
+	setStatus("Submitted to Google Sheet.");
+	clearForm();
       } catch (err) {
         addToQueue(payload);
         setStatus("Could not submit. Saved locally for later sync.");
