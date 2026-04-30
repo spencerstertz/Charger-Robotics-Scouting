@@ -108,7 +108,7 @@
       <div class="small" id="queueCount"></div>
     </div>
 
-    <form id="scoutForm">
+    <form id="scoutForm" novalidate>
       <div class="card">
         <div class="row">
           <div>
@@ -238,7 +238,7 @@
           <div>
             <label>Did they climb in auto?</label>
             <div class="radio-group">
-              <label><input type="radio" name="autoClimb" value="Left" required> Yes</label>
+              <label><input type="radio" name="autoClimb" value="Yes" required> Yes</label>
               <label><input type="radio" name="autoClimb" value="No"> No</label>
               <label><input type="radio" name="autoClimb" value="Tried but failed"> Tried but Failed</label>
             </div>
@@ -293,11 +293,12 @@
           </div>
           <div>
             <label>Where did they climb?</label>
-            <div class="radio-group">
-              <label><input type="radio" name="climbWhere" value="Left"> Left</label>
-              <label><input type="radio" name="climbWhere" value="Center"> Center</label>
-              <label><input type="radio" name="climbWhere" value="Right"> Right</label>
-            </div>
+<div class="radio-group">
+  <label><input type="radio" name="climbWhere" value="" checked> None</label>
+  <label><input type="radio" name="climbWhere" value="Left"> Left</label>
+  <label><input type="radio" name="climbWhere" value="Center"> Center</label>
+  <label><input type="radio" name="climbWhere" value="Right"> Right</label>
+</div>
           </div>
         </div>
 
@@ -315,13 +316,14 @@
           </div>
         </div>
 
-        <label>How did they pass?</label>
-        <div class="radio-group">
-          <label><input type="radio" name="passType" value="Limited Aim"> Limited Aim</label>
-          <label><input type="radio" name="passType" value="Stop Pass"> Stop Pass</label>
-          <label><input type="radio" name="passType" value="Dynamic Pass"> Dynamic Pass</label>
-          <label><input type="radio" name="passType" value="Other"> Other</label>
-        </div>
+      <label>How did they pass?</label>
+<div class="radio-group">
+  <label><input type="radio" name="passType" value="" checked> None</label>
+  <label><input type="radio" name="passType" value="Limited Aim"> Limited Aim</label>
+  <label><input type="radio" name="passType" value="Stop Pass"> Stop Pass</label>
+  <label><input type="radio" name="passType" value="Dynamic Pass"> Dynamic Pass</label>
+  <label><input type="radio" name="passType" value="Other"> Other</label>
+</div>
 
         <label>Passing Ability Descriptions</label>
         <textarea readonly>Limited Aim: Pass over fixed path relative to robot
@@ -512,31 +514,44 @@ Dynamic Aim: Pass to fixed location while moving</textarea>
       form.reset();
     }
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+function validatePayload(payload) {
+  if (!payload.name || !payload.team || !payload.matchNumber || !payload.onField) {
+    setStatus("Missing required fields.");
+    return false;
+  }
 
-      const payload = getPayload();
+  if (!Number.isInteger(Number(payload.matchNumber))) {
+    setStatus("Match number must be a whole number.");
+    return false;
+  }
 
-      if (!Number.isInteger(Number(payload.matchNumber))) {
-        setStatus("Match number must be a whole number.");
-        return;
-      }
+  if (payload.onField === "No") {
+    return true;
+  }
 
-      if (
-        !payload.name ||
-        !payload.team ||
-        !payload.matchNumber ||
-        !payload.onField ||
-        !payload.autoZones ||
-        !payload.preloadBeforeNeutral ||
-        payload.autoFuel === "" ||
-        !payload.autoClimb ||
-        payload.teleopFuel === "" ||
-        !payload.died
-      ) {
-        setStatus("Missing required fields.");
-        return;
-      }
+  if (
+    !payload.autoZones ||
+    !payload.preloadBeforeNeutral ||
+    payload.autoFuel === "" ||
+    !payload.autoClimb ||
+    payload.teleopFuel === "" ||
+    !payload.died
+  ) {
+    setStatus("Missing required fields.");
+    return false;
+  }
+
+  return true;
+}
+
+   form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const payload = getPayload();
+
+  if (!validatePayload(payload)) {
+    return;
+  }
 
       if (!navigator.onLine) {
         addToQueue(payload);
@@ -557,12 +572,17 @@ Dynamic Aim: Pass to fixed location while moving</textarea>
       }
     });
 
-    document.getElementById("saveOfflineBtn").addEventListener("click", () => {
-      const payload = getPayload();
-      addToQueue(payload);
-      setStatus("Saved locally without submitting.");
-      clearForm();
-    });
+   document.getElementById("saveOfflineBtn").addEventListener("click", () => {
+  const payload = getPayload();
+
+  if (!validatePayload(payload)) {
+    return;
+  }
+
+  addToQueue(payload);
+  setStatus("Saved locally without submitting.");
+  clearForm();
+});
 
     document.getElementById("syncBtn").addEventListener("click", syncQueue);
     document.getElementById("clearBtn").addEventListener("click", clearForm);
